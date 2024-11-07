@@ -34,8 +34,20 @@ const SpeedReader = () => {
   const sizeMenuRef = useRef(null);
 
   useEffect(() => {
-    wpmRef.current = wpm;
-  }, [wpm]);
+    if (isPlaying) {
+      lastTimeRef.current = null;
+      animationRef.current = requestAnimationFrame(animate);
+    } else {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    }
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
+  }, [isPlaying, animate]); // Add animate to dependencies
 
   const handleTextChange = (e) => {
     setText(e.target.value);
@@ -304,3 +316,4 @@ const SpeedReader = () => {
 };
 
 export default SpeedReader;
+export { SpeedReader };  // Add this line at the bottom
