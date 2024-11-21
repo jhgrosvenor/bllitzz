@@ -35,8 +35,7 @@ const SpeedReader = () => {
 
   useEffect(() => {
     if (isPlaying) {
-      lastTimeRef.current = null;
-      animationRef.current = requestAnimationFrame(animate);
+      animate();
     } else {
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);

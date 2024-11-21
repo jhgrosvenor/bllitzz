@@ -1,15 +1,7 @@
-import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Providers } from "./providers";  // We'll create this
 import "./globals.css";
-import { ThemeProvider } from "next-themes";
-
 const inter = Inter({ subsets: ["latin"] });
-
-export const metadata: Metadata = {
-  title: "Blitzz - Speed Reader",
-  description: "A modern speed reading application",
-};
-
 export default function RootLayout({
   children,
 }: {
@@ -18,14 +10,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
